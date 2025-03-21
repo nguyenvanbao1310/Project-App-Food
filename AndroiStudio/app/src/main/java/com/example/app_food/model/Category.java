@@ -1,4 +1,4 @@
-package com.example.app_food.Model;
+package com.example.app_food.model;
 
 public class Category {
     private String id;

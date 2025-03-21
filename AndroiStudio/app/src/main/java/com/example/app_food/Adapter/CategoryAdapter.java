@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app_food.Model.Category;
+import com.example.app_food.model.Category;
 import com.example.app_food.R;
 import com.squareup.picasso.Picasso;
 

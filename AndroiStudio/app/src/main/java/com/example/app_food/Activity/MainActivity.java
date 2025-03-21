@@ -3,15 +3,14 @@ package com.example.app_food.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_food.Adapter.CategoryAdapter;
-import com.example.app_food.Config.ApiService;
-import com.example.app_food.Model.Category;
+import com.example.app_food.api.ApiService;
+import com.example.app_food.model.Category;
 import com.example.app_food.Retrofit.RetrofitClient;
 
 import com.example.app_food.R;

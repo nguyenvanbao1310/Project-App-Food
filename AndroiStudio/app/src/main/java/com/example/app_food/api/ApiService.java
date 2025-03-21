@@ -1,6 +1,6 @@
-package com.example.app_food.Config;
+package com.example.app_food.api;
 
-import com.example.app_food.Model.Category;
+import com.example.app_food.model.Category;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
