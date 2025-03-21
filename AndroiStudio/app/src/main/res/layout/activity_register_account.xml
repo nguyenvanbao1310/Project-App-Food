@@ -253,5 +253,5 @@
             android:textStyle="bold"
             android:gravity="center"/>
     </LinearLayout>
-    
+
 </androidx.constraintlayout.widget.ConstraintLayout>
