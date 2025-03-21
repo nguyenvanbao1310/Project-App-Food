@@ -1,6 +1,7 @@
 package com.example.app_food.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +39,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category category = categoryList.get(position);
         holder.categoryName.setText(category.getName());
 
-        // Sử dụng Picasso để tải hình ảnh từ URL
+        String imageUrl = category.getImageUrl();
+        Log.d("Picasso", "Loading image from URL: " + imageUrl);
+
         Picasso.get()
-                .load(category.getImageUrl())
+                .load(imageUrl)
                 .placeholder(R.drawable.placeholder_image)
                 .error(R.drawable.error_image)
                 .into(holder.categoryImage);

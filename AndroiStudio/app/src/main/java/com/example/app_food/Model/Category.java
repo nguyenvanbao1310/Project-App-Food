@@ -2,11 +2,11 @@ package com.example.app_food.Model;
 
 public class Category {
     private String name;
-    private String imageUrl;
+    private String images;
 
-    public Category(String name, String imageUrl) {
+    public Category(String name, String images) {
         this.name = name;
-        this.imageUrl = imageUrl;
+        this.images = images;
     }
 
     public String getName() {
@@ -14,6 +14,6 @@ public class Category {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return images;
     }
 }
