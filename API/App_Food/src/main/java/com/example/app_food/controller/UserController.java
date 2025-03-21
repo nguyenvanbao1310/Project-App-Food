@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -19,9 +21,9 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody User request) {
         boolean isAuthenticated = userService.authenticate(request.getUsername(), request.getPassword());
         if (isAuthenticated) {
-            return ResponseEntity.ok("Login successful!");
+            return ResponseEntity.ok(Map.of("message", "Login successful!"));
         } else {
-            return ResponseEntity.status(401).body("Invalid username or password");
+            return ResponseEntity.status(401).body(Map.of("message", "Invalid username or password"));
         }
     }
 }
