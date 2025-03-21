@@ -9,8 +9,8 @@ public class RetrofitClient {
     public static Retrofit getRetrofit() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL) // Đường dẫn API
-                    .addConverterFactory(GsonConverterFactory.create()) // Chuyển JSON thành Object
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
