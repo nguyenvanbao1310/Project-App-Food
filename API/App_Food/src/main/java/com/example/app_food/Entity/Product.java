@@ -1,14 +1,13 @@
 package com.example.app_food.Entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
-public class Product
-{
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,7 +17,7 @@ public class Product
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    @JsonIgnore
+    @JsonManagedReference // Cho phép serialize category trong Product
     private Category category;
 
     @Column(nullable = false, precision = 10, scale = 2)
@@ -34,8 +33,7 @@ public class Product
     private BigDecimal rating;
 
     // Constructors
-    public Product() {
-    }
+    public Product() {}
 
     public Product(String name, Category category, BigDecimal price, String image, String description, BigDecimal rating) {
         this.name = name;
@@ -103,5 +101,8 @@ public class Product
         this.rating = rating;
     }
 
+    // Phương thức để API trả về category_id thay vì trả về toàn bộ category object
+    public Integer getCategoryId() {
+        return (category != null) ? category.getId() : null;
+    }
 }
-

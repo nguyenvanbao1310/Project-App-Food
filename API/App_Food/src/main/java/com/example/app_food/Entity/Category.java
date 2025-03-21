@@ -1,26 +1,30 @@
 package com.example.app_food.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "categories")
-public class Category
-{
+public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Dùng IDENTITY thay vì AUTO để tránh lỗi ID trùng
     private int id;
 
+    @Column(nullable = false)
     private String name;
 
     private String images;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference // Tránh lỗi vòng lặp JSON khi lấy danh sách products
     private List<Product> products;
 
+    // Constructors
     public Category() {}
 
     public Category(int id, String name, String images, String description) {
@@ -30,6 +34,7 @@ public class Category
         this.description = description;
     }
 
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -50,7 +55,7 @@ public class Category
         return images;
     }
 
-    public void setImages(String image) {
+    public void setImages(String images) {
         this.images = images;
     }
 

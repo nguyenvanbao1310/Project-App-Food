@@ -19,10 +19,4 @@ public class ProductController {
     public List<Product> getProducts() {
         return productService.getAllProducts();
     }
-
-//    @GetMapping("/sorted")
-//    public List<Product> getSortedProducts() {
-//        List<Product> products = productService.getAllProductsSortedByCategoryAndPrice();
-//        return products;
-//    }
 }

@@ -17,6 +17,8 @@ import com.example.app_food.Retrofit.RetrofitClient;
 import com.example.app_food.Service.APIService;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,11 +30,16 @@ public class PageAcitivy extends AppCompatActivity {
     private ProductAdapter adapter;
 
     private APIService apiService;
+
+    private List<Product> originalProductList = new ArrayList<>();
     private List<Product> productList;
 
     private RecyclerView recyclerViewCategories;
     private CategoryAdapter categoryAdapter;
     private List<Category> categoryList;
+
+
+    private int selectedCategoryId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +50,18 @@ public class PageAcitivy extends AppCompatActivity {
         recyclerViewCategories.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         categoryList = new ArrayList<>();
-        categoryAdapter = new CategoryAdapter(this, categoryList);
+        categoryAdapter = new CategoryAdapter(this, categoryList, new CategoryAdapter.OnCategoryClickListener(){
+            @Override
+            public void onCategoryClick(int categoryId)
+            {
+                filterProductsByCategory(categoryId);
+            }
+        });
         recyclerViewCategories.setAdapter(categoryAdapter);
 
         fetchCategories();
         AnhXa();
         GetProducts();
-//        filterAndSortProducts("1");
 
     }
 
@@ -63,6 +75,7 @@ public class PageAcitivy extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     categoryList.clear();
                     categoryList.addAll(response.body());
+                    // Log số lượng category
                     Log.d("FetchCategories", "Number of categories: " + categoryList.size());
                     categoryAdapter.notifyDataSetChanged();
                 } else {
@@ -72,6 +85,7 @@ public class PageAcitivy extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
+                // Xử lý lỗi và log lỗi
                 Log.e("FetchCategories", "Error fetching categories: " + t.getMessage());
             }
         });
@@ -94,8 +108,11 @@ public class PageAcitivy extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response){
                 if (response.isSuccessful()){
+
                     Log.d("logg", "API gọi thành công!");
                     productList = response.body();
+                    originalProductList.clear(); // Cập nhật danh sách gốc
+                    originalProductList.addAll(productList);
                     for (Product product : productList) {
                         Log.d("logg", "Product: " + product.getName() + ", Image: " + product.getImage());
                     }
@@ -103,6 +120,11 @@ public class PageAcitivy extends AppCompatActivity {
                         Log.d("logg", "Số lượng category nhận được: " + productList.size());
                     } else {
                         Log.e("logg", "Danh sách category rỗng hoặc null!");
+                    }
+                    for (Product product : originalProductList) {
+                        Log.d("logg", "Sản phẩm: " + product.getName() +
+                                ", Category ID: " + product.getCategoryId() +
+                                ", Price: " + product.getPrice());
                     }
                     adapter = new ProductAdapter(productList);
                     recyclerView.setLayoutManager(new GridLayoutManager(PageAcitivy.this, 2));
@@ -126,31 +148,35 @@ public class PageAcitivy extends AppCompatActivity {
     }
 
 
-    private void filterAndSortProducts(String categoryId) {
-        Log.d("FilterProducts", "Số lượng sản phẩm lọc được: " );
 
-        if (productList != null) {
-            List<Product> filteredList = new ArrayList<>();
+    private void filterProductsByCategory(int categoryId) {
+        selectedCategoryId = categoryId;
 
-            // Lọc sản phẩm theo categoryId
-            for (Product product : productList) {
-                if (product.getCategoryId() == 1) {  // So sánh trực tiếp thay vì equals()
-                    filteredList.add(product);
+        if (categoryId == -1) {
+            productList.clear();
+            productList.addAll(originalProductList);
+        }
+        else {
+            // Lọc sản phẩm theo danh mục
+            List<Product> filteredProducts = new ArrayList<>();
+            for (Product product : originalProductList) {  // Dùng originalProductList
+                if (product.getCategoryId() == categoryId) {
+                    filteredProducts.add(product);
                 }
             }
-
-            // Sắp xếp danh sách theo giá giảm dần
-//            Collections.sort(filteredList, new Comparator<Product>() {
-//                @Override
-//                public int compare(Product p1, Product p2) {
-//                    return Double.compare(p2.getPrice(), p1.getPrice()); // Sắp xếp giảm dần
-//                }
-//            });
-
-            // Cập nhật RecyclerView với danh sách đã lọc
-            adapter = new ProductAdapter(filteredList);
-            recyclerView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+            productList.clear();
+            productList.addAll(filteredProducts);
         }
+        // **Sắp xếp danh sách sản phẩm theo giá tăng dần**
+        Collections.sort(productList, new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return Double.compare(p1.getPrice(), p2.getPrice()); // So sánh theo giá tiền
+            }
+        });
+        adapter.notifyDataSetChanged();
+
+        Log.d("logg", "Số sản phẩm trong category " + categoryId + ": " + productList.size());
     }
+
 }
