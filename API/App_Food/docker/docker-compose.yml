@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: vj_airline
+      MYSQL_DATABASE: food_app
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
