@@ -1,4 +1,6 @@
 package com.example.app_food.Retrofit;
+import com.example.app_food.api.UserService;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -14,5 +16,8 @@ public class RetrofitClient {
                     .build();
         }
         return retrofit;
+    }
+    public static UserService getApiUserService() {
+        return getRetrofit().create(UserService.class);
     }
 }
