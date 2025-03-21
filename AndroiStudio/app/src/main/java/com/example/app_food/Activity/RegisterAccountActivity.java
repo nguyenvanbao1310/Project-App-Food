@@ -3,8 +3,10 @@ package com.example.app_food.Activity;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -19,11 +21,19 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.app_food.R;
+import com.example.app_food.model.User;
+
+import java.io.IOException;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterAccountActivity extends AppCompatActivity {
 
 
-    private EditText emailInput, passwordInput,passwordConfirmInput;
+    private EditText emailInput, passwordInput,passwordConfirmInput, usernameInput;
     private TextView otpMessage;
 
 
@@ -48,9 +58,9 @@ public class RegisterAccountActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.email_input);
         passwordInput = findViewById(R.id.password_input);
         passwordConfirmInput=findViewById(R.id.confirm_password_input);
+        usernameInput = findViewById(R.id.name_input);
         ImageView passwordToggle = findViewById(R.id.password_toggle);
         ImageView passwordToggleConfirm = findViewById(R.id.confirm_password_toggle);
-        otpMessage = findViewById(R.id.otp_message);
 
         // Ẩn OTP Card ban đầu
         otpCard.setVisibility(View.INVISIBLE);
@@ -68,7 +78,49 @@ public class RegisterAccountActivity extends AppCompatActivity {
             }
         });
     }
+    private void registerUser() {
+        String email = emailInput.getText().toString().trim();
+        String password = passwordInput.getText().toString().trim();
+        String passwordConfirm = passwordConfirmInput.getText().toString().trim();
+        String username = usernameInput.getText().toString().trim();
 
+        // Kiểm tra xác nhận mật khẩu
+        if (!password.equals(passwordConfirm)) {
+            Toast.makeText(RegisterAccountActivity.this, "Mật khẩu xác nhận không khớp!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User user = new User(username, email, password, false);
+        Call<Map<String, String>> call = apiService.signUpPostForm(user);
+
+        call.enqueue(new Callback<Map<String, String>>() {
+            @Override
+            public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
+                try {
+                    if (response.isSuccessful() && response.body() != null) {
+                        String message = response.body().get("message");
+                        Log.d("API_RESPONSE", "Response: " + message);
+                        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegisterActivity.this,VerifyCodeActivity.class);
+                        intent.putExtra("email", user.getEmail()); // Gửi userId sang MessListActivity
+                        startActivity(intent);
+                    } else {
+                        String errorBody = response.errorBody().string();
+                        Log.e("API_RESPONSE", "Error: " + errorBody);
+                        Toast.makeText(RegisterActivity.this, "Đăng ký thất bại! " + errorBody, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, String>> call, Throwable t) {
+                Toast.makeText(RegisterActivity.this, "Lỗi kết nối!", Toast.LENGTH_SHORT).show();
+                Log.e("Register", "Error: " + t.getMessage());
+            }
+        });
+    }
     private boolean validateInput() {
         String email = emailInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
