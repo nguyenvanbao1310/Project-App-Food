@@ -12,3 +12,8 @@
 ![Image](https://github.com/user-attachments/assets/fe3b1727-59a1-4c4d-a3d1-d7a856ecf268)
 ### main
 ![Image](https://github.com/user-attachments/assets/49bd9f16-3fe7-4b13-8d0c-fdd4e53849c9)
+
+### Lọc sản phẩm theo category và sắp xếp theo chiều tăng dần giá tiền
+![image](https://github.com/user-attachments/assets/3524ec55-e33d-4c34-bcab-8ce7c3a7e165)
+![image](https://github.com/user-attachments/assets/3ce8abfc-f881-415d-a8d9-eb7a200b8863)
+![image](https://github.com/user-attachments/assets/cad9dcb0-ad56-4b2f-b20a-e542126b8eca)
