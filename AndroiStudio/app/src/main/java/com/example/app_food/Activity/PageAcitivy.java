@@ -17,6 +17,8 @@ import com.example.app_food.Retrofit.RetrofitClient;
 import com.example.app_food.Service.APIService;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -160,6 +162,13 @@ public class PageAcitivy extends AppCompatActivity {
             productList.clear();
             productList.addAll(filteredProducts);
         }
+        // **Sắp xếp danh sách sản phẩm theo giá tăng dần**
+        Collections.sort(productList, new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return Double.compare(p1.getPrice(), p2.getPrice()); // So sánh theo giá tiền
+            }
+        });
         adapter.notifyDataSetChanged();
 
         Log.d("logg", "Số sản phẩm trong category " + categoryId + ": " + productList.size());
