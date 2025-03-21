@@ -14,7 +14,7 @@ public interface UserService {
     Call<Map<String, String>> signUpPostForm(@Body User user);
     @POST("auth/verify-code")
     Call<Map<String, String>> verifyCode(@Body Map<String, String> requestBody);
-    @POST("user/login") // Đường dẫn API của bạn
+    @POST("user/login")
     Call<ResponseBody> login(@Body User request);
 
 }

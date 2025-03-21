@@ -96,7 +96,7 @@
                     android:id="@+id/email_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="example@gmail.com"
+                    android:hint="username"
                     android:inputType="textEmailAddress" />
 
             </LinearLayout>
