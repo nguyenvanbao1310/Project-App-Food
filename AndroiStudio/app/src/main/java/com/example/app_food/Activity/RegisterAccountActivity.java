@@ -18,7 +18,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class RegisterActivity extends AppCompatActivity {
+import com.example.app_food.R;
+
+public class RegisterAccountActivity extends AppCompatActivity {
+
 
     private EditText emailInput, passwordInput,passwordConfirmInput;
     private TextView otpMessage;
@@ -29,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_account);
 
         // Xử lý toàn màn hình
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.register), (v, insets) -> {
