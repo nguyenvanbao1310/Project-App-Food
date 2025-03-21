@@ -1,3 +1,5 @@
+## Bảng phân công
+![Image](https://github.com/user-attachments/assets/99ef87d2-46f5-42fa-8035-4114a105ac81)
 ## Giao diện (UI) Foodie 
 ### Intro
 ![Image](https://github.com/user-attachments/assets/a283de70-ded3-4997-9a76-11eb76f7f39e)
