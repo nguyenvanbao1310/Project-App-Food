@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -21,9 +21,9 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody User request) {
         boolean isAuthenticated = userService.authenticate(request.getUsername(), request.getPassword());
         if (isAuthenticated) {
-            return ResponseEntity.ok(Map.of("message", "Login successful!"));
+            return ResponseEntity.ok(Map.of("message", request.getUsername()));
         } else {
-            return ResponseEntity.status(401).body(Map.of("message", "Invalid username or password"));
+            return ResponseEntity.status(401).body(Map.of("message", "Mật khẩu hoặc tên tài khoản không đúng"));
         }
     }
 }
