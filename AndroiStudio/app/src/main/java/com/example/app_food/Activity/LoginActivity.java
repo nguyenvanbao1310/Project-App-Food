@@ -82,11 +82,9 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(jsonString);
                         String username = jsonObject.getString("message");
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, PageAcitivy.class);
                         intent.putExtra("username", username);
                         startActivity(intent);
-                        finish();
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
