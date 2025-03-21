@@ -1,7 +1,7 @@
 package com.example.app_food;
 
 
-import com.example.app_food.entity.User;
+import com.example.app_food.Entity.User;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;

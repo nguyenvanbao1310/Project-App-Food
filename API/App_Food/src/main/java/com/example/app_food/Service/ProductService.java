@@ -1,7 +1,7 @@
-package com.example.app_food.service;
+package com.example.app_food.Service;
 
-import com.example.app_food.entity.Product;
-import com.example.app_food.repository.ProductRepository;
+import com.example.app_food.Entity.Product;
+import com.example.app_food.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

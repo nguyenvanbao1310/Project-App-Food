@@ -1,7 +1,7 @@
 package com.example.app_food.Controller;
 
-import com.example.app_food.entity.Product;
-import com.example.app_food.service.ProductService;
+import com.example.app_food.Entity.Product;
+import com.example.app_food.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

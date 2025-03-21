@@ -23,7 +23,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.app_food.R;
 import com.example.app_food.Retrofit.RetrofitClient;
 import com.example.app_food.api.UserService;
-import com.example.app_food.model.User;
+import com.example.app_food.Model.User;
 
 import java.io.IOException;
 import java.util.Map;

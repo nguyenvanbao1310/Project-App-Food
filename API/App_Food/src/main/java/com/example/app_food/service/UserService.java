@@ -1,7 +1,7 @@
-package com.example.app_food.service;
+package com.example.app_food.Service;
 
-import com.example.app_food.entity.User;
-import com.example.app_food.repository.UserRepository;
+import com.example.app_food.Entity.User;
+import com.example.app_food.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
-package com.example.app_food.service;
+package com.example.app_food.Service;
 
-import com.example.app_food.entity.Category;
-import com.example.app_food.repository.CategoryRepository;
+import com.example.app_food.Entity.Category;
+import com.example.app_food.Repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
