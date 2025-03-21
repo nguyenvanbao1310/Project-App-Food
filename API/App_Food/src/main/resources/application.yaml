@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: ${DBMS_URL:jdbc:mysql://localhost:3306/appfood}
+    url: ${DBMS_URL:jdbc:mysql://localhost:3306/login}
     username: ${DBMS_USERNAME:root}
-    password: ${DBMS_PASSWORD:duy301104}
+    password: ${DBMS_PASSWORD:0762751676Kh@}
     driverClassName: com.mysql.cj.jdbc.Driver
     hikari:
       minimum-idle: 5
