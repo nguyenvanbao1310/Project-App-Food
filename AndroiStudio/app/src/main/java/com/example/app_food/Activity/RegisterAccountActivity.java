@@ -21,6 +21,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.app_food.R;
+import com.example.app_food.Retrofit.RetrofitClient;
+import com.example.app_food.api.UserService;
 import com.example.app_food.model.User;
 
 import java.io.IOException;
@@ -35,7 +37,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
 
     private EditText emailInput, passwordInput,passwordConfirmInput, usernameInput;
     private TextView otpMessage;
-
+    private UserService apiService;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,6 +45,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register_account);
+        apiService = RetrofitClient.getApiUserService();
 
         // Xử lý toàn màn hình
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.register), (v, insets) -> {
@@ -72,9 +75,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
         // Sự kiện nhấn nút "Create Account"
         createAccountButton.setOnClickListener(v -> {
             if (validateInput()) {
-                String email = emailInput.getText().toString().trim();
-                otpMessage.setText("Code sent to " + email + ". This code will expire in 01:30");
-                showOTPForm(signupCard, otpCard);
+                registerUser();
             }
         });
     }
@@ -96,27 +97,22 @@ public class RegisterAccountActivity extends AppCompatActivity {
         call.enqueue(new Callback<Map<String, String>>() {
             @Override
             public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
-                try {
-                    if (response.isSuccessful() && response.body() != null) {
-                        String message = response.body().get("message");
-                        Log.d("API_RESPONSE", "Response: " + message);
-                        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegisterActivity.this,VerifyCodeActivity.class);
-                        intent.putExtra("email", user.getEmail()); // Gửi userId sang MessListActivity
-                        startActivity(intent);
-                    } else {
-                        String errorBody = response.errorBody().string();
-                        Log.e("API_RESPONSE", "Error: " + errorBody);
-                        Toast.makeText(RegisterActivity.this, "Đăng ký thất bại! " + errorBody, Toast.LENGTH_SHORT).show();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (response.isSuccessful() && response.body() != null) {
+                    String message = response.body().get("message");
+                    Log.d("API_RESPONSE", "Response: " + message);
+                    Toast.makeText(RegisterAccountActivity.this, message, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterAccountActivity.this,VerifyOTPActivity.class);
+                    intent.putExtra("email", user.getEmail()); // Gửi userId sang MessListActivity
+                    startActivity(intent);
+                } else {
+                    Log.e("API_RESPONSE", "Error: " + response);
+                    Toast.makeText(RegisterAccountActivity.this, "Đăng ký thất bại! " , Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Map<String, String>> call, Throwable t) {
-                Toast.makeText(RegisterActivity.this, "Lỗi kết nối!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterAccountActivity.this, "Lỗi kết nối!", Toast.LENGTH_SHORT).show();
                 Log.e("Register", "Error: " + t.getMessage());
             }
         });
@@ -160,35 +156,4 @@ public class RegisterAccountActivity extends AppCompatActivity {
         });
     }
 
-    private void showOTPForm(View signupCard, View otpCard) {
-        // Animation SignUp trượt sang trái + mờ dần
-        ObjectAnimator slideLeft = ObjectAnimator.ofFloat(signupCard, "translationX", 0f, -signupCard.getWidth());
-        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(signupCard, "alpha", 1f, 0f);
-
-        // Animation OTP Card trượt vào từ phải + hiện dần
-        ObjectAnimator slideIn = ObjectAnimator.ofFloat(otpCard, "translationX", otpCard.getWidth(), 0f);
-        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(otpCard, "alpha", 0f, 1f);
-
-        // Gom animation SignUp lại
-        AnimatorSet hideSignUp = new AnimatorSet();
-        hideSignUp.playTogether(slideLeft, fadeOut);
-        hideSignUp.setDuration(500);
-
-        // Gom animation OTP lại
-        AnimatorSet showOTP = new AnimatorSet();
-        showOTP.playTogether(slideIn, fadeIn);
-        showOTP.setDuration(500);
-
-        // Chạy Animation
-        hideSignUp.addListener(new android.animation.AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(android.animation.Animator animation) {
-                signupCard.setVisibility(View.GONE);
-                otpCard.setVisibility(View.VISIBLE);
-                showOTP.start();
-            }
-        });
-
-        hideSignUp.start();
-    }
 }

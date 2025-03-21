@@ -16,8 +16,8 @@ public class Email {
 
     public String getRandom() {
         Random rnd = new Random();
-        int number = rnd.nextInt(999999);
-        return String.format("%06d", number);
+        int number = rnd.nextInt(9999);
+        return String.format("%04d", number);
     }
 
     // send email to the user email
