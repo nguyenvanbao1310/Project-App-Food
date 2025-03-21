@@ -1,4 +1,4 @@
-package com.example.app_food.Controller;
+package com.example.app_food.controller;
 
 import com.example.app_food.entity.User;
 import com.example.app_food.service.UserService;
@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -19,9 +21,9 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody User request) {
         boolean isAuthenticated = userService.authenticate(request.getUsername(), request.getPassword());
         if (isAuthenticated) {
-            return ResponseEntity.ok("Login successful!");
+            return ResponseEntity.ok(Map.of("message", request.getUsername()));
         } else {
-            return ResponseEntity.status(401).body("Invalid username or password");
+            return ResponseEntity.status(401).body(Map.of("message", "Invalid username or password"));
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.app_food.Activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -43,6 +44,12 @@ public class PageAcitivy extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        String username = getIntent().getStringExtra("username");
+
+        // Hiển thị username trên giao diện
+        TextView usernameTextView = findViewById(R.id.tvUserGreeting);
+        usernameTextView.setText("Hi!, " + username + "!");
 
         recyclerViewCategories = findViewById(R.id.recycler_view_categories);
         recyclerViewCategories.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));

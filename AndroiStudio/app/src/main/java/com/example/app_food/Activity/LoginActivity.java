@@ -30,7 +30,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
-    private TextView loginText;
+    private TextView loginText,registerText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.email_edittext);
         passwordEditText = findViewById(R.id.password_edittext);
         loginText = findViewById(R.id.login_text);
+        registerText = findViewById(R.id.register_text);
 
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,11 +55,20 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        registerText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterAccountActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
 
     private void loginUser(String email, String password) {
         UserService apiService = RetrofitClient.getRetrofit().create(UserService.class);
-        com.example.app_food.Model.User request = new com.example.app_food.Model.User(email, password);
+        User request = new User(email, password);
 
         Call<ResponseBody> call = apiService.login(request);
         call.enqueue(new Callback<ResponseBody>() {
@@ -68,10 +78,10 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         String jsonString = response.body().string();
                         JSONObject jsonObject = new JSONObject(jsonString);
-                        String message = jsonObject.getString("message");
+                        String username = jsonObject.getString("message");
 
-                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, PageAcitivy.class);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                         finish();
 
@@ -79,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 } else {
-                    Toast.makeText(LoginActivity.this, "Sai email hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Sai tên tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
                 }
             }
 
