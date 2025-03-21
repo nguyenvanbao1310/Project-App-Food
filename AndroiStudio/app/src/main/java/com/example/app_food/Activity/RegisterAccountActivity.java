@@ -56,7 +56,6 @@ public class RegisterAccountActivity extends AppCompatActivity {
 
         // Lấy view từ layout
         View signupCard = findViewById(R.id.signup_card);
-        View otpCard = findViewById(R.id.otp_card);
         View createAccountButton = findViewById(R.id.btn_create_account);
         emailInput = findViewById(R.id.email_input);
         passwordInput = findViewById(R.id.password_input);
@@ -64,9 +63,6 @@ public class RegisterAccountActivity extends AppCompatActivity {
         usernameInput = findViewById(R.id.name_input);
         ImageView passwordToggle = findViewById(R.id.password_toggle);
         ImageView passwordToggleConfirm = findViewById(R.id.confirm_password_toggle);
-
-        // Ẩn OTP Card ban đầu
-        otpCard.setVisibility(View.INVISIBLE);
 
         // Xử lý sự kiện hiển thị/ẩn mật khẩu
         togglePasswordVisibility(passwordInput, passwordToggle);
@@ -79,6 +75,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
             }
         });
     }
+
     private void registerUser() {
         String email = emailInput.getText().toString().trim();
         String password = passwordInput.getText().toString().trim();
