@@ -1,4 +1,4 @@
-package com.example.app_food.Repository;
+package com.example.app_food.repository;
 
 import com.example.app_food.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
 }

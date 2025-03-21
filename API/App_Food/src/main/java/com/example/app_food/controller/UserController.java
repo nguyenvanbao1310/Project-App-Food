@@ -1,7 +1,7 @@
 package com.example.app_food.Controller;
 
 import com.example.app_food.entity.User;
-import com.example.app_food.Service.UserService;
+import com.example.app_food.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -7,7 +7,6 @@
     android:id="@+id/main"
     android:background="@android:color/white">
 
-<<<<<<< .mine
     <!-- Nền màu cam với góc bo tròn ở dưới - giảm chiều cao xuống để nhường chỗ cho nút -->
     <View
         android:id="@+id/orangeBackground"
@@ -68,12 +67,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="Hình ảnh burger"
-            android:src="@drawable/logo1"
+
             android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
     <!-- Thêm hiệu ứng bóng mềm cho văn bản -->
-=======
+
     <!-- Nền màu cam với góc bo tròn ở dưới - giảm chiều cao xuống để nhường chỗ cho nút -->
     <View
         android:id="@+id/orangeBackground"
@@ -139,7 +138,7 @@
     </androidx.cardview.widget.CardView>
 
     <!-- Thêm hiệu ứng bóng mềm cho văn bản -->
->>>>>>> .theirs
+
     <TextView
         android:id="@+id/vietnameseTextView"
         android:layout_width="wrap_content"

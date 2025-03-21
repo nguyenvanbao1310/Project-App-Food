@@ -1,14 +1,14 @@
-package com.example.app_food.Entity;
+package com.example.app_food.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -103,9 +103,5 @@ public class Product {
         this.rating = rating;
     }
 
-
-    @Transient
-    public Integer getCategoryId() {
-        return category != null ? category.getId() : null;
-    }
 }
+
