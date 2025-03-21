@@ -22,7 +22,7 @@
 
         <!-- Ð?t RegisterAccountActivity làm activity kh?i d?ng -->
         <activity
-            android:name=".Activity.RegisterAccountActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
