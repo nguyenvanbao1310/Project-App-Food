@@ -1,4 +1,4 @@
-package com.example.app_food.controller;
+package com.example.app_food.Controller;
 
 import com.example.app_food.entity.User;
 import com.example.app_food.service.UserService;

@@ -18,7 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.app_food.R;
 import com.example.app_food.Retrofit.RetrofitClient;
 import com.example.app_food.api.UserService;
-import com.example.app_food.model.User;
+import com.example.app_food.Model.*;
 
 import org.json.JSONObject;
 
@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String email, String password) {
         UserService apiService = RetrofitClient.getRetrofit().create(UserService.class);
-        User request = new User(email, password);
+        com.example.app_food.Model.User request = new com.example.app_food.Model.User(email, password);
 
         Call<ResponseBody> call = apiService.login(request);
         call.enqueue(new Callback<ResponseBody>() {

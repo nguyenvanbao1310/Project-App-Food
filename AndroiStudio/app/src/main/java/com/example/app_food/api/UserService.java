@@ -1,6 +1,6 @@
 package com.example.app_food.api;
 
-import com.example.app_food.model.User;
+import com.example.app_food.Model.User;
 
 import java.util.Map;
 

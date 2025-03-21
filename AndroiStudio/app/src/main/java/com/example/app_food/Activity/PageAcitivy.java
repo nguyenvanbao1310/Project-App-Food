@@ -23,6 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+// Đỗ Văn Thường - Đăng Huỳnh Sơn
 public class PageAcitivy extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProductAdapter adapter;
@@ -63,7 +64,6 @@ public class PageAcitivy extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     categoryList.clear();
                     categoryList.addAll(response.body());
-                    // Log số lượng category
                     Log.d("FetchCategories", "Number of categories: " + categoryList.size());
                     categoryAdapter.notifyDataSetChanged();
                 } else {
@@ -73,7 +73,6 @@ public class PageAcitivy extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-                // Xử lý lỗi và log lỗi
                 Log.e("FetchCategories", "Error fetching categories: " + t.getMessage());
             }
         });
