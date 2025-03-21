@@ -18,4 +18,4 @@ public class UserService {
         Optional<User> userOptional = userRepository.findByUsername(username);
         return userOptional.map(user -> user.getPassword().equals(password)).orElse(false);
     }
-} 
+}
