@@ -4,4 +4,6 @@
     <color name="colorPrimary">#FF6200EE</color>
     <color name="white">#FFFFFF</color>
     <color name="pink">#EC2578</color>
+    <color name="red">#F44336</color>
+    <color name="gray">#D3D3D3</color>
 </resources>

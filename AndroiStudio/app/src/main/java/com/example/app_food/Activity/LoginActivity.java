@@ -18,7 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.app_food.R;
 import com.example.app_food.Retrofit.RetrofitClient;
 import com.example.app_food.api.UserService;
-import com.example.app_food.model.User;
+import com.example.app_food.Model.User;
 
 import org.json.JSONObject;
 
@@ -30,12 +30,14 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
-    private TextView loginText;
+
+    private TextView loginText,registerEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        registerEditText = findViewById(R.id.register_text);
 
         emailEditText = findViewById(R.id.email_edittext);
         passwordEditText = findViewById(R.id.password_edittext);
@@ -54,6 +56,16 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        registerEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterAccountActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
     }
 
     private void loginUser(String email, String password) {

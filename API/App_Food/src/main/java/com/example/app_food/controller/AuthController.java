@@ -1,8 +1,8 @@
-package com.example.app_food.controller;
+package com.example.app_food.Controller;
 
 import com.example.app_food.Email;
-import com.example.app_food.entity.User;
-import com.example.app_food.service.UserService;
+import com.example.app_food.Entity.User;
+import com.example.app_food.Service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
