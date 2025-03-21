@@ -23,7 +23,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-// Đỗ Văn Thường - Đăng Huỳnh Sơn
 public class PageAcitivy extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProductAdapter adapter;
