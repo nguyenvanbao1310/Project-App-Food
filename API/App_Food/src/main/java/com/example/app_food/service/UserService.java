@@ -18,4 +18,15 @@ public class UserService {
         Optional<User> userOptional = userRepository.findByUsername(username);
         return userOptional.map(user -> user.getPassword().equals(password)).orElse(false);
     }
+
+     public void saveUser(User user){
+         userRepository.save(user);
+    }
+
+    public Optional<User> findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }
