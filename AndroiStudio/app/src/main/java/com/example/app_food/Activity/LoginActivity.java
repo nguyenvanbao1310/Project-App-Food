@@ -68,10 +68,10 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         String jsonString = response.body().string();
                         JSONObject jsonObject = new JSONObject(jsonString);
-                        String message = jsonObject.getString("message");
+                        String username = jsonObject.getString("message");
 
-                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                         finish();
 

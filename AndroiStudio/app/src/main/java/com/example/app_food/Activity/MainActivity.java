@@ -31,5 +31,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+        // Nhận username từ Intent
+        String username = getIntent().getStringExtra("username");
+
+        // Hiển thị username trên giao diện
+        TextView usernameTextView = findViewById(R.id.tvUserGreeting);
+        usernameTextView.setText("Hi!, " + username + "!");
     }
 }
