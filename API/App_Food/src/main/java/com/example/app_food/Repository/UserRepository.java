@@ -1,6 +1,6 @@
 package com.example.app_food.Repository;
 
-import com.example.app_food.entity.User;
+import com.example.app_food.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
