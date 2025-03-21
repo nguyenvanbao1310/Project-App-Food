@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-    <!-- Cấp quyền truy cập Internet & trạng thái mạng -->
+    <!-- C?p quy?n truy c?p Internet & tr?ng th�i m?ng -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -18,7 +20,7 @@
         android:theme="@style/Theme.App_Food"
         tools:targetApi="31">
 
-        <!-- Đặt RegisterAccountActivity làm activity khởi động -->
+        <!-- �?t RegisterAccountActivity l�m activity kh?i d?ng -->
         <activity
             android:name=".Activity.RegisterAccountActivity"
             android:exported="true">
