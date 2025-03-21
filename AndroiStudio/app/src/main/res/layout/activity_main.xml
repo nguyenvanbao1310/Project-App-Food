@@ -7,7 +7,7 @@
     android:id="@+id/main"
     android:background="@android:color/white">
 
-    <!-- Nền màu cam với góc bo tròn ở dưới - giảm chiều cao xuống để nhường chỗ cho nút -->
+    <!-- Nền màu cam với góc bo tròn ở dưới -->
     <View
         android:id="@+id/orangeBackground"
         android:layout_width="0dp"
@@ -17,9 +17,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHeight_percent="0.75"/>
+        app:layout_constraintHeight_percent="0.75" />
 
-    <!-- Thêm hiệu ứng bóng mềm cho logo -->
+    <!-- Hiệu ứng bóng mềm cho logo -->
     <androidx.cardview.widget.CardView
         android:id="@+id/logoCardView"
         android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
             android:padding="8dp"/>
     </androidx.cardview.widget.CardView>
 
-    <!-- Sử dụng CardView để thêm bóng đổ cho hình ảnh -->
+    <!-- Bóng đổ cho hình ảnh -->
     <androidx.cardview.widget.CardView
         android:id="@+id/imageCardView"
         android:layout_width="260dp"
@@ -71,7 +71,7 @@
             android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
-    <!-- Thêm hiệu ứng bóng mềm cho văn bản -->
+    <!-- Văn bản tiêu đề -->
     <TextView
         android:id="@+id/vietnameseTextView"
         android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageCardView"
         app:layout_constraintVertical_bias="0.4" />
 
-    <!-- Nút bắt đầu với góc bo tròn và hiệu ứng bóng - đặt dưới nền cam -->
+    <!-- Nút bắt đầu -->
     <androidx.cardview.widget.CardView
         android:id="@+id/buttonCardView"
         android:layout_width="0dp"
@@ -119,7 +119,7 @@
             android:stateListAnimator="@null" />
     </androidx.cardview.widget.CardView>
 
-    <!-- Thêm hiệu ứng trang trí -->
+    <!-- Hiệu ứng trang trí -->
     <View
         android:layout_width="20dp"
         android:layout_height="20dp"
