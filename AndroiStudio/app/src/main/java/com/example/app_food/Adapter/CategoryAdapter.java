@@ -24,9 +24,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private List<Category> categoryList;
     private Context context;
 
-    public CategoryAdapter(Context context, List<Category> categoryList) {
+    private OnCategoryClickListener listener;
+
+    public interface OnCategoryClickListener {
+        void onCategoryClick(int categoryId);
+    }
+
+
+    public CategoryAdapter(Context context, List<Category> categoryList, OnCategoryClickListener listener) {
         this.context = context;
         this.categoryList = categoryList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -53,7 +61,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "ID: " + category.getId(), Toast.LENGTH_SHORT).show();
+                if (listener != null) {
+                    listener.onCategoryClick(category.getId()); // Gửi ID category về PageActivity
+                }
             }
         });
     }
@@ -74,5 +84,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             categoryImage = itemView.findViewById(R.id.category_image);
             categoryName = itemView.findViewById(R.id.category_name);
         }
+
+
     }
 }
